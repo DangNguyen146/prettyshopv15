@@ -24,9 +24,9 @@
                         </StackLayout>
 
                         <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40"> // Add
-                            marginTop
+                            <!-- marginTop
                             property
-                            with value of 50
+                            with value of 50 -->
                             <!-- Add the 'v-if' directive to only display the label when there are products -->
                             <Label text="Top Product" class="title" fontSize="20" fontWeight="bold" />
                             <Button text="View product more" class="btn-more" height="40" width="100"

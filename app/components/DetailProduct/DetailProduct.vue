@@ -20,9 +20,9 @@
             </StackLayout>
             <Button row="4" col="1" text="Add cart" class="add-to-cart-button" @tap="btnAddCart(product.id, quantity)" />
             <Button row="5" col="1" text="Add to wishlist" class="add-to-cart-button" @tap="btnAddWishList()" />
+            <Label class="comment-product-name" text="Comment" fontSize="title" fontWeight="bold" />
             <StackLayout row="6" col="1" orientation="horizontal">
-                <Label class="comment-product-name" text="Comment" fontSize="title" fontWeight="bold" />
-                <!-- <CommentBox :id="product.id" :product="product" :productId="product.id" /> -->
+                <ListCommentBox :product="product" />
             </StackLayout>
         </StackLayout>
     </Page>
@@ -30,15 +30,16 @@
 
 
 <script>
-// import CommentBox from "./CommentBox.vue"
+
 import { getString } from "@nativescript/core/application-settings";
 import { apiUrl } from "../../config/config"
+import ListCommentBox from "./../../container/ListCommentBox"
 
 export default {
     props: ["id"],
     name: "DetailProduct",
     components: {
-        // CommentBox 
+        ListCommentBox
     },
     data() {
         return {
