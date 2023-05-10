@@ -1,16 +1,20 @@
 <template>
-    <TabView  :selectedIndex="selectedIndex" @selectedIndexChange="indexChange">
+    <TabView :selectedIndex="selectedIndex" @selectedIndexChange="indexChange">
         <TabViewItem title="Cart">
-            <label text="Cart" />
+            <CartView />
         </TabViewItem>
         <TabViewItem title="Wishlist">
-            <label text="Wishlist" />
+            <Wishlist/>
         </TabViewItem>
     </TabView>
 </template>
 <script>
+import CartView from "./FramCart/CartView";
+import Wishlist from "./FramCart/Wishlist";
 
 export default {
-
+    components: {
+        CartView, Wishlist
+    },
 }
 </script>

@@ -19,7 +19,7 @@
                 <Button class="product-quantity-decrease" text="-" @tap="decreaseQuantity" />
             </StackLayout>
             <Button row="4" col="1" text="Add cart" class="add-to-cart-button" @tap="btnAddCart(product.id, quantity)" />
-            <Button row="5" col="1" text="Add to wishlist" class="add-to-cart-button" />
+            <Button row="5" col="1" text="Add to wishlist" class="add-to-cart-button" @tap="btnAddWishList()" />
             <StackLayout row="6" col="1" orientation="horizontal">
                 <Label class="comment-product-name" text="Comment" fontSize="title" fontWeight="bold" />
                 <!-- <CommentBox :id="product.id" :product="product" :productId="product.id" /> -->
@@ -102,6 +102,30 @@ export default {
                 } else {
                     alert('An error occurred. Please try again later.');
                 }
+            }
+        },
+        async btnAddWishList() {
+            try {
+                const response = await fetch(`${apiUrl}wishlist/add?token=${getString('token')}`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        id: this.product.id,
+                        name: this.product.name,
+                        imageURL: this.product.imageURL,
+                        price: this.product.price,
+                        description: this.product.description,
+                        categoryId: this.product.categoryId
+                    })
+                });
+                if (response) {
+                    alert("Add wish list success");
+                }
+                else {
+                    alert("Error in fetching data");
+                }
+            }
+            catch (error) {
+                alert("Error in fetching data", error);
             }
         }
     },
