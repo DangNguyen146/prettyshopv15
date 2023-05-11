@@ -2,11 +2,13 @@
   <Page class="page">
     <ActionBar class="action-bar">
       <NavigationButton visibility="hidden" />
-      <GridLayout columns="50, *">
-        <Label class="action-bar-title" text="Home" colSpan="2" />
-
-        <Label class="fas" text.decode="&#xf0c9;" @tap="onDrawerButtonTap" />
+      <GridLayout columns="*, auto, auto">
+        <!-- <Label text.decode="&#xf0c9;" @tap="onDrawerButtonTap" class="fas " col="2" /> -->
+        <Label class="action-bar-title" text="PrettyShop" colSpan="2" />
+        <Label class="fas right-aligned" text.decode="&#xf002;" @tap="onDrawerButtonTap" />
       </GridLayout>
+
+
     </ActionBar>
 
     <TabView androidTabsPosition="bottom" :selectedIndex="selectedIndex" @selectedIndexChange="indexChange">
@@ -20,7 +22,7 @@
         <FrameCart />
       </TabViewItem>
       <TabViewItem title="Setting">
-        <label text="Content for Tab 4" />
+        <FrameSetting />
       </TabViewItem>
     </TabView>
 
@@ -36,6 +38,9 @@ import LoginPage from './Auth/LoginPage';
 import FrameHome from "../container/FrameHome/FrameHome"
 import FrameProduct from "~/container/FrameHome/FrameProduct";
 import FrameCart from "../container/FrameHome/FrameCart";
+import FrameSetting from "../container/FrameHome/FrameSetting";
+
+import SearchPage from "./SearchPage/SearchPage";
 
 export default {
   mounted() {
@@ -58,7 +63,7 @@ export default {
     }
   },
   components: {
-    FrameHome, FrameProduct, FrameCart
+    FrameHome, FrameProduct, FrameCart, FrameSetting
   },
   computed: {
     message() {
@@ -67,7 +72,7 @@ export default {
   },
   methods: {
     onDrawerButtonTap() {
-      utils.showDrawer();
+     this.$navigateTo(SearchPage);
     },
     indexChange: function (args) {
       let newIndex = args.value
@@ -82,5 +87,20 @@ export default {
 @import '@nativescript/theme/scss/variables/blue';
 // End custom common variables
 
-// Custom styles
+.fas {
+  font-size: 24;
+  vertical-align: center;
+}
+
+.action-bar-title {
+  font-size: 20;
+  text-align: center;
+  vertical-align: center;
+}
+
+.right-aligned {
+  font-size: 24;
+  text-align: right;
+  vertical-align: center;
+}
 </style>

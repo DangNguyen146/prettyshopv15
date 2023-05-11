@@ -3,13 +3,13 @@
         <StackLayout class="container">
             <!--        for each order display -->
             <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40"> // Add
-                marginTop
+                <!-- marginTop
                 property
-                with value of 50
+                with value of 50 -->
                 <!-- Add the 'v-if' directive to only display the label when there are products -->
                 <Label text="Your wishList" class="title" fontSize="20" fontWeight="bold" />
 
-                <ScrollView>
+                <ScrollView @scroll="handleScroll">
                     <!-- Add the 'v-if' directive to display products only when there are products -->
                     <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
                         v-if="products && products.length > 0">
@@ -44,7 +44,9 @@ export default {
                     method: "GET",
                 });
                 if (response) {
-                    this.products = await response.json();
+                    const data = await response.json();
+                    // alert(JSON.stringify(data));
+                    this.products = data;
 
                 } else {
                     alert("Error in fetching data");
@@ -52,7 +54,15 @@ export default {
             } catch (error) {
                 alert(error);
             }
-        }
+        },
+        handleScroll(e) {
+            const scrollView = e.object;
+            const isAtBottom = scrollView.verticalOffset == 0 ;
+            if (isAtBottom ) {
+                const token = getString('token');
+                this.listWishList(token);
+            }
+        },
     },
     mounted() {
         try {
@@ -62,6 +72,7 @@ export default {
             }
             else {
                 this.listWishList(token);
+
             }
         } catch (error) {
             alert(error)

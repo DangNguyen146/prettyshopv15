@@ -34,7 +34,7 @@
                                                 marginBottom="5" />
                                             <Label :text="'$' + orderItem.product.price" fontSize="subtitle" color="red"
                                                 marginBottom="5" />
-                                            <Label :text="orderItem.product.description.substring(0, 65) + '...'" />
+                                            <Label :text="orderItem.product.description" />
                                         </StackLayout>
                                     </GridLayout>
                                 </StackLayout>

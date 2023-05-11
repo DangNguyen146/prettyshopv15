@@ -38,5 +38,3 @@ export default {
     }
 };
 </script> 
-
-<!--I assumed that the component DetailProductView already exists in the project.-->

@@ -7,7 +7,7 @@
         <StackLayout col="1" class="product-details" width="50%">
             <Label :text="product.name" fontSize="subtitle" fontWeight="bold" marginBottom="5" />
             <Label :text="'$' + product.price" fontSize="subtitle" color="red" marginBottom="5" />
-            <Label :text="product.description.substring(0, 65) + '...'" />
+            <Label :text="product.description" />
         </StackLayout>
     </GridLayout>
 </template>

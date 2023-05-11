@@ -20,7 +20,7 @@
                                         :category="category" />
                                 </WrapLayout>
                             </ScrollView>
-                            <Label class="info" text="Hello world!!!" v-if="!categories" />
+                            <Label class="info" text="No category!" v-if="!categories" />
                         </StackLayout>
 
                         <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40"> // Add
@@ -56,6 +56,7 @@
 </template>
 <script>
 import { getString } from "@nativescript/core/application-settings";
+import { apiUrl } from "~/config/config";
 
 import CategoryBoxHome from "../CategoryBoxHome";
 import ProductBox from "../ProductBox";
@@ -83,7 +84,7 @@ export default {
 
         async fetchData() {
             try {
-                const response = await fetch("https://prettyshopbe-production.up.railway.app/category/", {
+                const response = await fetch(`${apiUrl}category/`, {
                     method: "GET",
                 });
 
@@ -98,7 +99,7 @@ export default {
             }
 
             try {
-                const response2 = await fetch("https://prettyshopbe-production.up.railway.app/product/", {
+                const response2 = await fetch(`${apiUrl}product/`, {
                     method: "GET",
                 });
 

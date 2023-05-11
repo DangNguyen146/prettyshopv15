@@ -2,10 +2,9 @@
   <Page class="page">
     <ActionBar class="action-bar">
       <NavigationButton visibility="hidden" />
-      <GridLayout columns="50, *">
-        <Label class="action-bar-title" text="LoginPage" colSpan="2" />
+      <GridLayout columns="50, auto, auto">
+        <Label class="action-bar-title" text="LoginPage" colSpan="3" />
 
-        <!-- <Label class="fas" text.decode="&#xf0c9;" @tap="onDrawerButtonTap" /> -->
       </GridLayout>
     </ActionBar>
 
@@ -17,6 +16,9 @@
         <TextField class="text-field" secure v-model="password" />
         <Button class="submit-button" text="Submit" @tap="submitForm" />
         <ActivityIndicator class="activity-indicator" :busy="isLoading" />
+
+        <Button class="submit-button" text="Forget Password" @tap="onForgetTap" />
+        <Button class="submit-button" text="Sign Up" @tap="onSignUpTap" />
       </StackLayout>
     </GridLayout>
   </Page>
@@ -27,6 +29,8 @@ import * as utils from "~/shared/utils";
 import { SelectedPageService } from "../../shared/selected-page-service";
 import { setString, getString } from "@nativescript/core/application-settings";
 import Home from "../Home";
+import ForgetPassword from "./ForgetPassword";
+import Signup from "./SignUp";
 
 export default {
   mounted() {
@@ -83,15 +87,73 @@ export default {
       } finally {
         this.isLoading = false;
       }
+    },
+    onForgetTap() {
+      this.$navigateTo(ForgetPassword, {
+        clearHistory: true
+      });
+    },
+    onSignUpTap() {
+      this.$navigateTo(Signup, {
+        clearHistory: true
+      });
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-// Start custom common variables
-@import '@nativescript/theme/scss/variables/blue';
-// End custom common variables
+$red-color: #FF0000;
 
-// Custom styles
+.page {
+  // background-color: $red-color;
+}
+
+.action-bar {
+  background-color: $red-color;
+  // color: white;
+}
+
+.action-bar-title {
+  // color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20;
+}
+
+.form-container {
+  margin: 30;
+}
+
+.label {
+  // color: white;
+  font-weight: bold;
+  margin-bottom: 10;
+  font-size: 18;
+}
+
+.text-field {
+  // background-color: white;
+  // color: black;
+  margin-bottom: 20;
+  font-size: 16;
+  height: 40;
+  padding-left: 10;
+  border-radius: 5;
+}
+
+.submit-button {
+  background-color: $red-color;
+  color: #fff;
+  text-align: center;
+  padding: 15;
+  height: 50;
+  border-radius: 5;
+  font-size: 18;
+  margin-bottom: 20;
+}
+
+.activity-indicator {
+  margin-top: 20;
+}
 </style>

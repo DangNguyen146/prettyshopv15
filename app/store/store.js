@@ -25,7 +25,7 @@ const store = new Vuex.Store({
         state.count++;
     },
     incrementCart(state, payload) {
-      if (payload.callapi != 0) {
+      if (payload.callapi != -1 ) {
         state.countCart = payload.callapi;
       }
       else

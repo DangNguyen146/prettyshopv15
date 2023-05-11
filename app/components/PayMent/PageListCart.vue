@@ -16,10 +16,12 @@
                                         marginBottom="5" />
                                     <Label :text="'$' + cartItem.product.price" fontSize="subtitle" color="red"
                                         marginBottom="5" />
-                                    <Label :text="cartItem.product.description.substring(0, 65) + '...'" />
+                                    <Label :text="cartItem.product.description" />
                                     <Label :text="'Quantity: ' + cartItem.quantity" fontSize="subtitle" fontWeight="bold"
                                         marginBottom="5" />
-
+                                    <Button text="Delete"
+                                        style=" backgroundColor: rgb(255, 0, 0);  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25); cursor: pointer;"
+                                        @tap="delteCart(cartItem.id)" />
                                 </StackLayout>
                             </GridLayout>
                         </StackLayout>
@@ -28,7 +30,7 @@
 
                             <Label :text="'Total : $ ' + totalcost.toFixed(2)" fontWeight="bold" marginBottom="5" />
                             <Button text="Confirm Order"
-                                style=" background-color: rgb(255, 0, 0);  color: white;  font-size: 16px;  font-weight: bold;  padding: 10px; border: none; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25); cursor: pointer;"
+                                style=" backgroundColor: rgb(255, 0, 0);  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25); cursor: pointer;"
                                 @tap="goPayMentPay" />
                         </StackLayout>
                     </GridLayout>
@@ -42,7 +44,11 @@ import { apiUrl } from '~/config/config';
 import { getString } from "@nativescript/core/application-settings";
 import MakePayMent from "./MakePayMent.vue";
 
-export default{
+
+
+
+
+export default {
     data() {
         return {
             cartItems: [],
@@ -62,19 +68,36 @@ export default{
                     // store cartitems and total price in two variables
                     this.cartItems = data.cartItems;
                     this.totalcost = data.totalCost;
+                    const cartCount = Object.keys(data.cartItems).length;
+                    this.$store.commit('incrementCart', { value: 0, callapi: cartCount });
                 }
             }
             catch (error) {
                 alert("Error in fetching data", error);
             }
         },
-        goPayMentPay(){
-            this.$navigateTo(MakePayMent)
+        goPayMentPay() {
+            try{
+                this.$navigateTo(MakePayMent)
+            }
+            catch(e)
+            {
+                alert(e)
+            }
+        },
+        async delteCart(itemId) {
+            const response = await fetch(`${apiUrl}cart/delete/${itemId}?token=${getString('token')}`, {
+                method: "DELETE",
+            });
+            if (response) {
+                const token = getString('token');
+                this.listCartItems(token);
+            }
         }
     },
     mounted() {
         const token = getString('token');
-        if(token)
+        if (token)
             this.listCartItems(token);
     },
 }

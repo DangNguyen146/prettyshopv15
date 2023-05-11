@@ -2,20 +2,14 @@
     <ScrollView>
         <StackLayout class="container">
             <!--        for each order display -->
-            <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40"> // Add
-                marginTop
-                property
-                with value of 50
-                <!-- Add the 'v-if' directive to only display the label when there are products -->
+            <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40">
                 <Label text="Your order" class="title" fontSize="20" fontWeight="bold" />
 
                 <ScrollView>
-                    <!-- Add the 'v-if' directive to display products only when there are products -->
                     <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
                         v-if="orderList && orderList.length > 0">
                         <CartBox v-for="order in orderList" :key="order.id" :order="order" />
                     </StackLayout>
-                    <!-- Display a message when there are no products -->
                     <Label v-else class="info" text="No products available" />
                 </ScrollView>
             </StackLayout>
@@ -52,7 +46,7 @@ export default {
                             // get short date
                             orderdate: order.createdDate.substring(0, 10),
                             // get image of the first orderItem of the order
-                            imageURL: order.orderItems[0].product.imageURL,
+                            imageURL: order.orderItems[0] ? order.orderItems[0].product.imageURL : "",
                             // get total items
                             totalItems: order.orderItems.length
                         })

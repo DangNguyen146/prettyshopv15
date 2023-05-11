@@ -4,7 +4,7 @@
         background-color: rgba(9, 173, 255, 0.7); 
         color: white; 
         font-size: 16px; 
-        font-weight: bold; 
+        fontWeight: bold; 
         padding: 10px;
         border: none;
         border-radius: 5px;

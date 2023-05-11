@@ -6,10 +6,10 @@
                     <!-- Add the 'v-if' directive to display products only when there are products -->
                     <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
                         v-if="comments && comments.length > 0">
-                        <CommentBox v-for="comment of comments" :key="comment.id" :comment="comment" :product="product" />
+                        <CommentBox v-for="comment of comments" :key="comment.id" :comment="comment"  :product="product" />
                     </StackLayout>
                     <!-- Display a message when there are no products -->
-                    <Label v-else class="info" text="No products available" />
+                    <Label v-else class="info" text="No comment available" />
                 </ScrollView>
             </StackLayout>
         </GridLayout>
