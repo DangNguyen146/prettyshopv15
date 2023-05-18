@@ -68,7 +68,7 @@ export default {
         try {
             const token = getString('token');
             if (!token || token == "") {
-                alert("Please login");
+                // alert("Please login");
             }
             else {
                 this.listWishList(token);

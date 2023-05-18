@@ -4,8 +4,8 @@
             <NavigationButton visibility="hidden" />
             <GridLayout columns="*, auto, auto">
                 <!-- <Label text.decode="&#xf0c9;" @tap="onDrawerButtonTap" class="fas " col="2" /> -->
+                <Image src="https://prettyshopfemobilev2.vercel.app/icon/house.png" class="fas"  @tap="onBackHome" col="1"   />
                 <Label class="action-bar-title" text="PrettyShop" colSpan="2" />
-                <Label class="fas right-aligned" text.decode="&#xf015;" @tap="onBackHome" />
             </GridLayout>
 
 
@@ -130,8 +130,9 @@ export default {
   
 <style scoped lang="scss">
 .fas {
-    font-size: 24;
-    vertical-align: center;
+    width: 24;
+    // font-size: 24;
+    // vertical-align: center;
 }
 
 .action-bar-title {
@@ -140,8 +141,11 @@ export default {
     vertical-align: center;
 }
 
-.right-aligned {
+.left-aligned {
     font-size: 24;
+    width: 24;
     text-align: left;
     vertical-align: center;
-}</style>
+}
+
+</style>

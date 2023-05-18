@@ -5,7 +5,7 @@
       <GridLayout columns="*, auto, auto">
         <!-- <Label text.decode="&#xf0c9;" @tap="onDrawerButtonTap" class="fas " col="2" /> -->
         <Label class="action-bar-title" text="PrettyShop" colSpan="2" />
-        <Label class="fas right-aligned" text.decode="&#xf002;" @tap="onDrawerButtonTap" />
+        <Image src="https://prettyshopfemobilev2.vercel.app/icon/search.png" class="fas right-aligned" @tap="onDrawerButtonTap" col="1" />
       </GridLayout>
 
 
@@ -100,7 +100,9 @@ export default {
 
 .right-aligned {
   font-size: 24;
+  width: 24;
   text-align: right;
   vertical-align: center;
+
 }
 </style>

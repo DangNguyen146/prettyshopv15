@@ -3,7 +3,7 @@
         <StackLayout width="100%" height="100%">
             <ScrollView>
                 <StackLayout>
-                    <GridLayout rows="*, *, auto">
+                    <GridLayout rows="*, *, auto">                       
                         <StackLayout row="0">
                             <GridLayout v-for="cartItem of cartItems" :key="cartItem.product.id" columns="auto, *"
                                 class="product-box" borderWidth="1" borderColor="#eee" borderRadius="5" padding="10"
@@ -77,11 +77,10 @@ export default {
             }
         },
         goPayMentPay() {
-            try{
+            try {
                 this.$navigateTo(MakePayMent)
             }
-            catch(e)
-            {
+            catch (e) {
                 alert(e)
             }
         },

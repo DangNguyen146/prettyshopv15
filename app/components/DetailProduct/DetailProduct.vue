@@ -15,9 +15,14 @@
                 <StackLayout row="3" col="1" class="product-quantity-container" orientation="horizontal"
                     verticalAlignment="center">
                     <Label class="product-quantity-label" text="Số lượng: " fontSize="subtitle" />
-                    <Label class="product-quantity" :text="quantity.toString()" fontSize="subtitle" />
+                    <Label class="product-quantity" :text="quantity.toString() + 'size: ' + sizeQuality" fontSize="subtitle" />
                     <Button class="product-quantity-increase" text="+" @tap="increaseQuantity" />
                     <Button class="product-quantity-decrease" text="-" @tap="decreaseQuantity" />
+                </StackLayout>
+                <StackLayout row="3" col="1">
+                    <Label text="Size:" class="size-label" />
+                    <Dropdown :items="availableSizes" class="size-dropdown" v-model="size"
+                        @update:selectedItem="onUpdateSelectedItem" />
                 </StackLayout>
                 <Button row="4" col="1" text="Add cart" class="add-to-cart-button"
                     @tap="btnAddCart(product.id, quantity)" />
@@ -78,12 +83,13 @@ import { getString } from "@nativescript/core/application-settings";
 import { apiUrl } from "../../config/config"
 import ListCommentBox from "./../../container/ListCommentBox"
 import CommentBox from "./../../container/CommentBox";
+import Dropdown from "~/container/Dropdown";
 
 export default {
     props: ["id"],
     name: "DetailProduct",
     components: {
-        ListCommentBox, CommentBox
+        ListCommentBox, CommentBox, Dropdown
     },
     data() {
         return {
@@ -93,7 +99,11 @@ export default {
             commentINput: '',
             comments: [],
             newcomment: null,
-            userID: null
+            userID: null,
+            availableSizes: [],
+            size: null,
+            quantityBySizes: {},
+            sizeQuality: ""
         };
     },
     methods: {
@@ -126,6 +136,12 @@ export default {
                 if (response) {
                     const data = await response.json();
                     this.product = data;
+                    this.availableSizes = data.size.map((size, index) => {
+                        return {
+                            label: size,
+                            value: `Quantity: ${data.quantityBySizes[index]}`
+                        };
+                    }).filter(size => size.value !== "Quantity: 0");
                 }
                 else {
                     alert("Error in fetching data");
@@ -157,6 +173,7 @@ export default {
                     body: JSON.stringify({
                         productId: productId,
                         quantity: quantity,
+                        quantityBySizes: { [this.sizeQuality]: quantity },
                     })
                 });
 
@@ -172,7 +189,7 @@ export default {
                 if (error.message === 'Failed to fetch') {
                     alert('Unable to connect to server. Please check your internet connection and try again.');
                 } else {
-                    alert('An error occurred. Please try again later.');
+                    alert('Please select size.');
                 }
             }
         },
@@ -262,6 +279,9 @@ export default {
                 console.log(error);
             }
         },
+        onUpdateSelectedItem(selectedItem) {
+            this.sizeQuality = selectedItem.label;
+        }
     },
     mounted() {
         try {

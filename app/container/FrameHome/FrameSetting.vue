@@ -86,7 +86,7 @@ export default {
         try {
             this.token = getString("token");
             if (!this.token || this.token == "") {
-                alert("Please login");
+                // alert("Please login");
             }
             else {
                 this.fetchData();
