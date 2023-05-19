@@ -40,28 +40,29 @@ export default {
             const url = args.url;
             if (url == "https://prettyshopfemobilev2.vercel.app/payment/success") {
                 try {
-                const response = await fetch(`${apiUrl}order/${this.id}/payment??token=${getString("token")}&sessionId=${getString("sessionId")}`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        status: true
-                    })
-                });
-                if (response) {
-                    alert({
-                        title: "State payment",
-                        message: "Payment success, please backhome and check cart! <3",
-                        okButtonText: "Back home"
-                    }).then(() => {
-                        this.$navigateTo(Home, {
-                            clearHistory: true
+                    const response = await fetch(`${apiUrl}order/${this.id}/payment?token=${getString("token")}`, {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            status: true
                         })
                     });
+                    if (response) {
+                        alert(JSON.stringify(response))
+                        alert({
+                            title: "State payment",
+                            message: "Payment success, please backhome and check cart! <3",
+                            okButtonText: "Back home"
+                        }).then(() => {
+                            this.$navigateTo(Home, {
+                                clearHistory: true
+                            })
+                        });
+                    }
                 }
-            }
-            catch (error) { }
+                catch (error) { }
             };
         },
         // onLoadStarted(args) {

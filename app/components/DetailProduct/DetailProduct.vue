@@ -15,7 +15,8 @@
                 <StackLayout row="3" col="1" class="product-quantity-container" orientation="horizontal"
                     verticalAlignment="center">
                     <Label class="product-quantity-label" text="Số lượng: " fontSize="subtitle" />
-                    <Label class="product-quantity" :text="quantity.toString() + 'size: ' + sizeQuality" fontSize="subtitle" />
+                    <Label class="product-quantity" :text="quantity.toString() + 'size: ' + sizeQuality"
+                        fontSize="subtitle" />
                     <Button class="product-quantity-increase" text="+" @tap="increaseQuantity" />
                     <Button class="product-quantity-decrease" text="-" @tap="decreaseQuantity" />
                 </StackLayout>
@@ -164,33 +165,38 @@ export default {
             }
         },
         async btnAddCart(productId, quantity) {
-            try {
-                const response = await fetch(`${apiUrl}cart/add?token=${getString('token')}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        productId: productId,
-                        quantity: quantity,
-                        quantityBySizes: { [this.sizeQuality]: quantity },
-                    })
-                });
+            if (this.sizeQuality) {
+                try {
+                    const response = await fetch(`${apiUrl}cart/add?token=${getString('token')}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            productId: productId,
+                            quantity: quantity,
+                            quantityBySizes: { [this.sizeQuality]: quantity },
+                        })
+                    });
 
-                if (response) {
-                    const data = await response.json();
-                    this.$store.commit('incrementCart', { value: this.quantity, callapi: -1 });
-                    alert('Add cart success, please back home to pay');
-                } else {
-                    alert('error');
+                    if (response) {
+                        const data = await response.json();
+                        this.$store.commit('incrementCart', { value: this.quantity, callapi: -1 });
+                        alert('Add cart success, please back home to pay');
+                    } else {
+                        alert('error');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    if (error.message === 'Failed to fetch') {
+                        alert('Unable to connect to server. Please check your internet connection and try again.');
+                    } else {
+                        alert('Please select size.');
+                    }
                 }
-            } catch (error) {
-                console.error(error);
-                if (error.message === 'Failed to fetch') {
-                    alert('Unable to connect to server. Please check your internet connection and try again.');
-                } else {
-                    alert('Please select size.');
-                }
+            }
+            else{
+                alert("Please choose size");
             }
         },
         async btnAddWishList() {

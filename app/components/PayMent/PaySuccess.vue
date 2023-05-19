@@ -34,7 +34,7 @@ export default {
         },
         async checkSuccess() {
             try {
-                alert(`${apiUrl}order/add?token=${getString("token")}&sessionId=${getString("sessionId")}`);
+                // alert(`${apiUrl}order/add?token=${getString("token")}&sessionId=${getString("sessionId")}`);
                 const response = await fetch(`${apiUrl}order/add?token=${getString("token")}&sessionId=${getString("sessionId")}`, {
                     method: "POST",
                     headers: {
@@ -42,7 +42,7 @@ export default {
                     },
                 });
                 if (response) {
-                    alert(JSON.stringify(response));
+                    // alert(JSON.stringify(response));
                 }
                 else {
                     alert("error");

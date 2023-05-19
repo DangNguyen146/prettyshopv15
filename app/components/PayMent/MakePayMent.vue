@@ -108,7 +108,7 @@ export default {
         },
         async getSection() {
             try {
-                const response = await fetch(`${apiUrl}order/create-checkout-session`, {
+                const response = await fetch(`${apiUrl}order/create-checkout-session/mobile`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
@@ -154,8 +154,8 @@ export default {
                     if (response) {
                         const data = await response.json();
                         const id = data.id;
-                        alert(JSON.stringify(data));
-                        alert(id);
+                        // alert(JSON.stringify(data));
+                        // alert(id);
                         this.$navigateTo(WebPayMent, {
                             props: {
                                 id: id,
@@ -191,7 +191,7 @@ export default {
                         })
                     });
                     if (response) {
-                        alert(JSON.stringify(response))
+                        // alert(JSON.stringify(response))
                         alert('Order is successful, please pay when you receive the goods');
                         this.$navigateTo(Home, {
                             clearHistory: true

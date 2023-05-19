@@ -1,14 +1,14 @@
 <template>
     <AbsoluteLayout>
         <StackLayout width="100%" height="100%">
-            <ScrollView>
+            <ScrollView @scroll="handleScroll">
                 <StackLayout>
                     <GridLayout class="page__content">
                         <StackLayout row="2" flexDirection="column" orientation="vertical">
                             with value of 50
                             <!-- Add the 'v-if' directive to only display the label when there are products -->
                             <Label text="Top Product" class="title" fontSize="20" fontWeight="bold" />
-                            <ScrollView @scroll="handleScroll">
+                            <ScrollView>
                                 <!-- Add the 'v-if' directive to display products only when there are products -->
                                 <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
                                     v-if="products && products.length > 0">
@@ -16,7 +16,7 @@
                                 </StackLayout>
                                 <!-- Display a message when there are no products -->
                                 <Label v-else class="info" text="No products available" />
-                                <ActivityIndicator :busy="isLoading" :visibility="isLoading ? 'visible' : 'collapsed'" />
+                                <ActivityIndicator class="loading" :busy="isLoading" :visibility="isLoading ? 'visible' : 'collapsed'" />
                             </ScrollView>
                         </StackLayout>
                     </GridLayout>
@@ -78,14 +78,18 @@ export default {
             } catch (error) {
                 alert("Error in fetching data", error);
             }
-            this.isLoading = false;
+            finally {
+                this.isLoading = false;
+            }
         },
         handleScroll(e) {
             const scrollView = e.object;
             const isAtBottom = scrollView.scrollableHeight - scrollView.verticalOffset < 100;
+            // alert(isAtBottom)
             if (isAtBottom && this.currentPage < this.totalPages && !this.isLoading) {
                 this.currentPage++;
                 this.isLoading = true;
+
                 this.fetchData();
             }
         },
@@ -106,3 +110,9 @@ export default {
     },
 }
 </script>
+<style>
+.loading{
+    width: 100;
+    
+}
+</style>
