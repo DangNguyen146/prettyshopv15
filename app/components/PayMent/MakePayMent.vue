@@ -66,76 +66,8 @@ export default {
                 clearHistory: true
             })
         },
-        async getAllItems() {
-            try {
-                const response = await fetch(`${apiUrl}cart/?token=${getString('token')}`, {
-                    method: "GET",
-                });
-                if (response) {
-                    const data = await response.json();
-
-                    let products = data;
-                    let len = Object.keys(products.cartItems).length;
-                    for (let i = 0; i < len; i++)
-                        this.checkoutBodyArray.push({
-                            imageUrl: products.cartItems[i].product.imageURL,
-                            productName: products.cartItems[i].product.name,
-                            quantity: products.cartItems[i].quantity,
-                            price: products.cartItems[i].product.price,
-                            productId: products.cartItems[i].product.id,
-                            userId: products.cartItems[i].userId,
-                        });
-                    try {
-                        this.getSection();
-                    } catch (error) {
-                        alert(error);
-                    }
-                }
-                else {
-                    alert("error");
-                }
-            }
-            catch (error) {
-                alert(error);
-                if (error.message === "Failed to fetch") {
-                    alert("Unable to connect to server. Please check your internet connection and try again.");
-                }
-                else {
-                    alert("An error occurred. Please try again later.");
-                }
-            }
-
-        },
-        async getSection() {
-            try {
-                const response = await fetch(`${apiUrl}order/create-checkout-session/mobile`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.checkoutBodyArray)
-                });
-                if (response) {
-                    const data = await response.json();
-                    setString('sessionId', data.sessionId);
-                    // alert(data.sessionId);
-                }
-                else {
-                    alert("error");
-                }
-            }
-            catch (error) {
-                alert(error);
-                if (error.message === "Failed to fetch") {
-                    alert("Unable to connect to server. Please check your internet connection and try again.");
-                }
-                else {
-                    alert("An error occurred. Please try again later.");
-                }
-            }
-
-
-        },
+        
+        
         async submitPayment() {
             if (this.selectedPage === 'payment') {
                 try {
@@ -214,7 +146,7 @@ export default {
         }
     },
     mounted() {
-        this.getAllItems();
+        
     }
 }
 </script>

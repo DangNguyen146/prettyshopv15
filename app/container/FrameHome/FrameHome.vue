@@ -29,7 +29,7 @@
                             with value of 50 -->
                             <!-- Add the 'v-if' directive to only display the label when there are products -->
                             <Label text="Top Product" class="title" fontSize="20" fontWeight="bold" />
-                            <Button text="View product more" class="btn-more" height="40" width="100"
+                            <Button text="Fillter" class="btn-more" height="40" width="100"
                                 horizontalAlignment="right" />
                             <ScrollView>
                                 <!-- Add the 'v-if' directive to display products only when there are products -->

@@ -1,5 +1,14 @@
 <template>
-   
+    <StackLayout>
+        <StackLayout class="item-product" @tap="goToProducts()">
+            <Image :src="product1.product.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
+                border-radius="50" />
+        </StackLayout>
+        <StackLayout class="item-product" @tap="goToProducts()">
+            <Image :src="product2.product.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
+                border-radius="50" />
+        </StackLayout>
+    </StackLayout>
 </template>
   
 <script>

@@ -1,21 +1,7 @@
 <template>
   <StackLayout class="dropdown-container" marginLeft="350">
-    <GridLayout
-      rows="auto, auto"
-      columns="*"
-      class="dropdown"
-      @tap="toggleDropdown"
-    >
-      <!-- <Label :text="selectedItem || placeholder" class="dropdown-label" /> -->
-      <Label text="Select size" class="dropdown-label" />
-      <Label text="▼" class="dropdown-arrow" />
-    </GridLayout>
-    <ListView
-      v-show="showDropdown"
-      class="dropdown-menu"
-      v-for="item of items"
-      @itemTap="selectItem"
-    >
+
+    <ListView class="dropdown-menu" v-for="item of items" @itemTap="selectItem">
       <v-template>
         <WrapLayout rows="auto" columns="*" class="dropdown-item">
           <Label :text="item.label" class="dropdown-item-label" />
@@ -29,6 +15,7 @@
 <script>
 export default {
   props: {
+    temp: null,
     items: {
       type: Array,
       required: true,
@@ -42,18 +29,10 @@ export default {
       default: "",
     },
   },
-  data() {
-    return {
-      showDropdown: false,
-    };
-  },
   methods: {
-    toggleDropdown() {
-      this.showDropdown = !this.showDropdown;
-    },
+
     selectItem(args) {
       this.$emit("update:selectedItem", args.item);
-      this.showDropdown = false;
     },
   },
 };

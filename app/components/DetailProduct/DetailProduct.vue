@@ -10,6 +10,8 @@
         </StackLayout>
         <Label row="0" col="1" class="product-name" :text="product.name" marginLeft="20" marginRight="20" fontSize="30"
           fontWeight="bold" textWrap="true" />
+        <Label row="1" col="1" class="product-description" :text="'purchases:' + product.accessCount" marginLeft="20"
+          marginRight="20" fontSize="20" />
         <Label row="1" col="1" class="product-description" :text="product.description" marginLeft="20" marginRight="20"
           fontSize="20" />
         <Label row="2" col="1" class="product-price" :text="'Price: $' + product.price" fontSize="" />
@@ -28,7 +30,17 @@
 
           <Button class="product-quantity-increase" text="+" @tap="increaseQuantity" paddingLeft="10" paddingRight="10" />
           <Button class="product-quantity-decrease" text="-" paddingLeft="10" paddingRight="10" @tap="decreaseQuantity" />
+
         </StackLayout>
+        <StackLayout row="5" col="1" orderRadius="10" shadowColor="#000000" shadowOffsetHeight="5" shadowOpacity="0.5">
+          <Label :text="'Tag: ' + sizeQuality" marginLeft="20" fontSize="20" />
+          <Label v-for="tag in listTag" :text="tag.tagName" :key="tag.id" @tap="handleTagPress(tag.id)" fontSize="15"
+            color="#123456" margin="12">
+          </Label>
+        </StackLayout>
+
+
+
 
         <StackLayout row="4" backgroundColor="#b3cde0" borderRadius="10" shadowColor="#000000" shadowOffsetHeight="5"
           shadowOpacity="0.5">
@@ -38,12 +50,34 @@
           </GridLayout>
           <ScrollView orientation="horizontal" showScrollBarIndicator="true" horizontalAlignment="end">
             <WrapLayout itemSpacing="12">
-              <ProductBoxHome  />
+              <StackLayout class="item-product" @tap="goToDetails(product1.id)">
+                <Image :src="product1.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
+                  border-radius="50" />
+                <Label :text="product1.name" fontSize="15" margin="12" />
+              </StackLayout>
+              <StackLayout class="item-product" @tap="goToDetails(product2.id)">
+                <Image :src="product2.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
+                  border-radius="50" />
+                <Label :text="product2.name" fontSize="15" margin="12" />
+
+              </StackLayout>
+              <StackLayout class="item-product" @tap="goToDetails(product3.id)">
+                <Image :src="product3.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
+                  border-radius="50" />
+                <Label :text="product3.name" fontSize="15" margin="12" />
+
+              </StackLayout>
+              <StackLayout class="item-product" @tap="goToDetails(product4.id)">
+                <Image :src="product4.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
+                  border-radius="50" />
+                <Label :text="product4.name" fontSize="15" margin="12" />
+              </StackLayout>
             </WrapLayout>
           </ScrollView>
         </StackLayout>
 
-        <Button row="5" col="1" text="+  🛒" fontSize="25" class="add-to-cart-button"
+
+        <Button row="6" col="1" text="+  🛒" fontSize="25" class="add-to-cart-button"
           @tap="btnAddCart(product.id, quantity)" />
         <Button row="5" col="1" text="+  ❤ " fontSize="25" class="add-to-cart-button" @tap="btnAddWishList()" />
         <Label class="comment-product-name" text="" fontSize="title" fontWeight="bold" />
@@ -73,7 +107,7 @@
             boxShadow="0 8 15 rgba(0, 0, 0, 0.3)" />
           <ActivityIndicator row="3" col="1" class="activity-indicator" :busy="isLoading" />
         </StackLayout>
-        <StackLayout row="6" col="1" orientation="horizontal">
+        <StackLayout row="7" col="1" orientation="horizontal">
           <StackLayout width="100%" height="100%">
             <GridLayout rows="*, *, auto">
               <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40">
@@ -103,6 +137,8 @@ import ListCommentBox from "./../../container/ListCommentBox";
 import CommentBox from "./../../container/CommentBox";
 import Dropdown from "~/container/Dropdown";
 import ProductBoxHome from "./ProductBoxHome";
+import DetailProduct from './DetailProduct.vue';
+
 
 export default {
   props: ["id"],
@@ -126,9 +162,31 @@ export default {
       quantityBySizes: {},
       sizeQuality: "",
       products: null,
+      product1: {
+        id: null,
+        imageURL: null,
+        name: null
+      },
+      product2: {
+        id: null,
+        imageURL: null,
+        name: null
+      },
+      product3: {
+        id: null,
+        imageURL: null,
+        name: null
+      },
+      product4: {
+        id: null,
+        imageURL: null,
+        name: null
+      },
+      listTag: [],
     };
   },
   methods: {
+    
     async fetchUser(token) {
       try {
         const response = await fetch(
@@ -155,6 +213,11 @@ export default {
         }
       }
     },
+    // handleTagPress(id){
+    //   this.$navigateTo(SearchPage, {
+    //     id:id
+    //   });
+    // }
     async fetchData5() {
       try {
         const response = await fetch(`${apiUrl}product/getproduct/${this.id}`, {
@@ -178,8 +241,96 @@ export default {
         alert("Error in fetching data", error);
       }
 
-     
+
+
+
+
     },
+    async fetchData6() {
+      try {
+        const response1 = await fetch(`${apiUrl}tag/random`, {
+          method: "GET",
+        });
+        if (response1) {
+          const data1 = await response1.json();
+          this.product1.imageURL = data1.product.imageURL;
+          this.product1.id = data1.product.id;
+          this.product1.name = data1.product.name;
+        } else {
+          alert("Error in fetching data");
+        }
+      } catch (error) {
+        alert("Error in fetching data", error);
+      }
+    },
+    async fetchData8() {
+      try {
+        const response2 = await fetch(`${apiUrl}color/random`, {
+          method: "GET",
+        });
+        if (response2) {
+          const data2 = await response2.json();
+          this.product2.imageURL = data2.product.imageURL;
+          this.product2.id = data2.product.id;
+          this.product2.name = data2.product.name;
+        } else {
+          alert("Error in fetching data");
+        }
+      } catch (error) {
+        alert("Error in fetching data", error);
+      }
+    },
+    async fetchData9() {
+      try {
+        const response1 = await fetch(`${apiUrl}tag/random`, {
+          method: "GET",
+        });
+        if (response1) {
+          const data1 = await response1.json();
+          this.product3.imageURL = data1.product.imageURL;
+          this.product3.id = data1.product.id;
+          this.product3.name = data1.product.name;
+        } else {
+          alert("Error in fetching data");
+        }
+      } catch (error) {
+        alert("Error in fetching data", error);
+      }
+    },
+    async fetchData7() {
+      try {
+        const response2 = await fetch(`${apiUrl}color/random`, {
+          method: "GET",
+        });
+        if (response2) {
+          const data2 = await response2.json();
+          this.product4.imageURL = data2.product.imageURL;
+          this.product4.id = data2.product.id;
+          this.product4.name = data2.product.name;
+        } else {
+          alert("Error in fetching data");
+        }
+      } catch (error) {
+        alert("Error in fetching data", error);
+      }
+    },
+
+    async fetchData10() {
+      try {
+        const response2 = await fetch(`${apiUrl}tag/product/${this.id}/tags`, {
+          method: "GET",
+        });
+        if (response2) {
+          const data2 = await response2.json();
+          this.listTag = data2;
+        } else {
+          alert("Error in fetching data");
+        }
+      } catch (error) {
+        alert("Error in fetching data", error);
+      }
+    },
+
     increaseQuantity() {
       if (this.quantity < 10) {
         // Fix the issue by assigning the new quantity to the data property
@@ -327,6 +478,17 @@ export default {
     onUpdateSelectedItem(selectedItem) {
       this.sizeQuality = selectedItem.label;
     },
+    goToDetails(id) {
+      try {
+        this.$navigateTo(DetailProduct, {
+          props: {
+            id,
+          },
+        });
+      } catch (error) {
+        alert(error);
+      }
+    },
   },
   mounted() {
     try {
@@ -334,6 +496,11 @@ export default {
       if (token) {
         this.fetchUser(token);
         this.fetchData5();
+        this.fetchData6();
+        this.fetchData7();
+        this.fetchData8();
+        this.fetchData9();
+        this.fetchData10();
         this.loadComments();
       }
     } catch (error) {
