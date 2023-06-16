@@ -29,8 +29,7 @@
                             with value of 50 -->
                             <!-- Add the 'v-if' directive to only display the label when there are products -->
                             <Label text="Top Product" class="title" fontSize="20" fontWeight="bold" />
-                            <Button text="Fillter" class="btn-more" height="40" width="100"
-                                horizontalAlignment="right" />
+                            <Button text="More" @tap="movescreenHoem" class="btn-more" height="40" width="100" horizontalAlignment="right" />
                             <ScrollView>
                                 <!-- Add the 'v-if' directive to display products only when there are products -->
                                 <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
@@ -62,6 +61,7 @@ import CategoryBoxHome from "../CategoryBoxHome";
 import ProductBox from "../ProductBox";
 import CartButton from "../CartButton";
 import SliderCarousel from "../SliderCarousel";
+import PageNew from "./PageNew"
 
 export default {
     data() {
@@ -76,7 +76,11 @@ export default {
         SliderCarousel, CategoryBoxHome, ProductBox, CartButton
     },
     methods: {
-
+        movescreenHoem() {
+            this.$navigateTo(PageNew, {
+                clearHistory: true,
+            });
+        },
         async fetchData() {
             try {
                 const response = await fetch(`${apiUrl}category/`, {

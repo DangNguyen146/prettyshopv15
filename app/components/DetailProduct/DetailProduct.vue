@@ -136,8 +136,13 @@ import { apiUrl } from "../../config/config";
 import ListCommentBox from "./../../container/ListCommentBox";
 import CommentBox from "./../../container/CommentBox";
 import Dropdown from "~/container/Dropdown";
+
 import ProductBoxHome from "./ProductBoxHome";
 import DetailProduct from './DetailProduct.vue';
+
+// import { TabView } from "@nativescript/core";
+
+// import SearchPage from "../SearchPage/SearchPage.vue";
 
 
 export default {
@@ -213,11 +218,11 @@ export default {
         }
       }
     },
-    // handleTagPress(id){
-    //   this.$navigateTo(SearchPage, {
-    //     id:id
-    //   });
-    // }
+    handleTagPress(id){
+      this.$navigateTo(SearchPage, {
+        id:id
+      });
+    },
     async fetchData5() {
       try {
         const response = await fetch(`${apiUrl}product/getproduct/${this.id}`, {
