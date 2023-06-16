@@ -12,7 +12,16 @@
     <GridLayout class="page__content">
       <Label class="page__content-icon fas" text.decode="&#xf013;" />
       <Label class="page__content-placeholder" :text="message" />
-      <Button class="submit-button" text="Logout" @tap="btnLogout" />
+      <Button
+        class="submit-button"
+        text="Log out"
+        backgroundColor="red"
+        color=" white "
+        fontWeight="bold"
+        borderRadius="100"
+        boxShadow="0 8 15 rgba(0, 0, 0, 0.3)"
+        @tap="btnLogout"
+      />
     </GridLayout>
   </Page>
 </template>
@@ -30,28 +39,26 @@ export default {
   computed: {
     message() {
       return "<!-- Page content goes here -->";
-    }
+    },
   },
   methods: {
     onDrawerButtonTap() {
       utils.showDrawer();
     },
     btnLogout() {
-      setString('token', "");
+      setString("token", "");
       this.$navigateTo(LoginPage, {
-        clearHistory: true
+        clearHistory: true,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 // Start custom common variables
-@import '@nativescript/theme/scss/variables/blue';
+@import "@nativescript/theme/scss/variables/blue";
 // End custom common variables
 
 // Custom styles
 </style>
-
-

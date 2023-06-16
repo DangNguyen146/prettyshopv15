@@ -67,12 +67,7 @@ export default {
     data() {
         return {
             token: null,
-            myData: [
-                { title: "", color: "#b3cde0", image: "https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg" },
-                { title: "", color: "#6497b1", image: "https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg" },
-                { title: "", color: "#005b96", image: "https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg" },
-                { title: "", color: "#03396c", image: "https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg" },
-            ],
+            myData: "https://img.freepik.com/premium-vector/modern-fashion-sale-banner_1340-15693.jpg?size=626&ext=jpg&ga=GA1.2.284055043.1685365997&semt=ais;https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg;https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg;https://prettyshopfe.vercel.app/img/cover1.f5a6905e.jpg",
             categories: null,
             products: null,
         }
