@@ -100,11 +100,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$red-color: rgb(0, 191, 255);
+$red-color: black;
 
-.page {
-  // background-color: $red-color;
-}
+
 .Or {
   text-align: center;
   font-size: 20px;

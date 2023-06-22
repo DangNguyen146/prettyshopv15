@@ -13,7 +13,7 @@
                     <!-- Add the 'v-if' directive to display products only when there are products -->
                     <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
                         v-if="products && products.length > 0">
-                        <ProductBox v-for="product of products" :key="product.id" :product="product" />
+                        <ProductBox v-for="(product,index) of products" :key="index" :product="product" />
                     </StackLayout>
                     <!-- Display a message when there are no products -->
                     <Label v-else class="info" text="No products available" />

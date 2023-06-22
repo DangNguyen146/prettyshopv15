@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$red-color: rgb(0, 191, 255);
+$red-color: black;
 
 .page {
   // background-color: $red-color;
@@ -126,7 +126,7 @@ $red-color: rgb(0, 191, 255);
   margin-bottom: 200px;
 }
 .action-bar {
-  background-color: rgb(0, 191, 255);
+  background-color: $red-color;
 }
 
 .action-bar-title {
@@ -163,7 +163,7 @@ $red-color: rgb(0, 191, 255);
   text-align: center;
   padding: 5;
   height: 50;
-  border-radius: 100px;
+  border-radius: 5;
   font-size: 18;
   margin-bottom: 20;
   font-weight: bold;
