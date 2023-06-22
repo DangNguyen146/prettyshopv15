@@ -53,8 +53,8 @@ export default {
                         alert(JSON.stringify(response))
                         alert({
                             title: "State payment",
-                            message: "Payment success, please backhome and check cart! <3",
-                            okButtonText: "Back home"
+                            message: "Payment success, Please back home and check your Order! ",
+                            okButtonText: "🏠"
                         }).then(() => {
                             this.$navigateTo(Home, {
                                 clearHistory: true

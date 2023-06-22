@@ -16,7 +16,7 @@
         <TextField v-model="lastName" :text="lastName" class="input" hint="Last Name" keyboardType="name"
           autocorrect="false" />
         <TextField v-model="email" :text="email" class="input" hint="Email" keyboardType="email" autocorrect="false" />
-        <Button class="submit-button" text="Submit" @tap="submitForm" />
+        <Button class="submit-button"  borderRadius="5" backgroundColor="black" color="white" fontWeight=" bold" text="SUBMIT" @tap="submitForm" />
         <ActivityIndicator class="activity-indicator" :busy="isLoading" />
       </StackLayout>
     </GridLayout>

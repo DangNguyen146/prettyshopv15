@@ -1,12 +1,12 @@
 <template lang="html">
   <GridLayout rows="auto, *" class="nt-drawer__content">
     <StackLayout row="0" class="nt-drawer__header" v-if="!user">
-      <Image class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;" />
+      <Image src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/337280061_3307936849467388_2008749423761594309_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=yjbb-BLt3NMAX9KKNZb&_nc_ht=scontent.fsgn5-9.fna&oh=00_AfAMAjViNrgY8QNbgl9cyPZBYZw25ffpSAsUbGGalBBC-A&oe=64982213" />
       <Label class="nt-drawer__header-brand" text="User Name" />
       <Label class="nt-drawer__header-footnote" text="username@mail.com" />
     </StackLayout>
     <StackLayout row="0" class="nt-drawer__header" v-if="user">
-      <Image class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;" />
+      <Image src="https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/337280061_3307936849467388_2008749423761594309_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=yjbb-BLt3NMAX9KKNZb&_nc_ht=scontent.fsgn5-9.fna&oh=00_AfAMAjViNrgY8QNbgl9cyPZBYZw25ffpSAsUbGGalBBC-A&oe=64982213" />
       <Label class="nt-drawer__header-brand" :text="user.lastName" />
       <Label class="nt-drawer__header-footnote" :text="user.email" />
     </StackLayout>

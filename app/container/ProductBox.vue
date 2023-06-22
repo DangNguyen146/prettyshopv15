@@ -4,18 +4,20 @@
     class="product-box"
     borderWidth="1"
     borderColor="#eee"
-    borderRadius="50"
+    borderRadius="10"
     padding="0 0 0 0"
     @tap="goToDetails"
     marginTop="10"
     boxShadow="0 8 15 rgba(0, 0, 0, 0.1)"
     width="340"
+    height="170"
   >
     <StackLayout col="0" class="product-image" marginRight="5" width="50%">
       <Image
         :src="product.imageURL"
         stretch="aspectFit"
-        borderRadius="50 0 0 50"
+        borderRadius="10 0 0 10"
+        height="170"
       />
     </StackLayout>
     <StackLayout col="1" class="product-details" width="50%">
@@ -23,18 +25,23 @@
         :text="product.name"
         fontSize="subtitle"
         fontWeight="bold"
-        margin="10"
+        margin="5 10 2 10"
         height="70"
         display="block"
         textWrap="true"
+        justifyContent="top"
       />
       <Label
         :text="'$' + product.price"
         fontSize="20"
         color="red"
-        margin="10"
+        margin="0 10 2 10"
       />
-      <Label :text="product.description" textWrap="true" margin="10" />
+      <Label
+        :text="product.description.slice(0, 20) + '...'"
+        textWrap="true"
+        margin="10 10 2 10"
+      />
     </StackLayout>
   </GridLayout>
 </template>

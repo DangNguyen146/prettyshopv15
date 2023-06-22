@@ -4,9 +4,8 @@
       :src="category.imageUrl"
       class="card-img-top"
       stretch="aspectFit"
-      width="200"
-      height="200"
-      border-radius="50"
+      height="250"
+      borderRadius="5"
     />
   </StackLayout>
 </template>

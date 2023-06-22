@@ -3,6 +3,7 @@ import RadSideDrawer from 'nativescript-ui-sidedrawer/vue'
 
 import Vuex from 'vuex'
 
+
 Vue.prototype.$localStorage = {
   getItem(key) {
     return global.android.context.getSharedPreferences('app', 0).getString(key, null)
@@ -14,7 +15,6 @@ Vue.prototype.$localStorage = {
     global.android.context.getSharedPreferences('app', 0).edit().remove(key).commit()
   }
 }
-
 
 
 Vue.use(RadSideDrawer)

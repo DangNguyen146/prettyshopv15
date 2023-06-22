@@ -5,16 +5,18 @@
       @tap="goToViewCart"
       class="cart-button"
       style="
-        background-color: rgba(9, 173, 255, 0.7);
+        background-color: BLACK;
+
         color: white;
         font-size: 25px;
         font-weight: bold;
         padding: 10px;
         border: none;
-        border-radius: 100px;
+        border-radius: 20px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
         cursor: pointer;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        
       "
     />
   </StackLayout>

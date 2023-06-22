@@ -10,14 +10,14 @@
             </GridLayout>
         </ActionBar>
         <GridLayout class="page__content">
-            <StackLayout class="form-container" row="0">
-                <Label class="label" text="fullname:" />
-                <TextField class="text-field" v-model="fullname" autocapitalizationType="none" />
+            <StackLayout class="form-container" row="0" margin="0 10 0 10">
+                <Label class="label" text="Fullname:" />
+                <TextField class="text-field" v-model="fullname"  autocapitalizationType="none" />
 
-                <Label class="label" text="addpress:" />
-                <TextField class="text-field" v-model="addpress" autocapitalizationType="none" />
+                <Label class="label" text="Addpress:" />
+                <TextField class="text-field" v-model="addpress"  autocapitalizationType="none" />
 
-                <Label class="label" text="phone:" />
+                <Label class="label" text="Phone:" />
                 <TextField class="text-field mb-20" v-model="phone" autocapitalizationType="none" />
 
                 <GridLayout columns="*, *" height="200">
@@ -36,7 +36,7 @@
                     </StackLayout>
                 </GridLayout>
                 <StackLayout>
-                    <Button class="submit-button" text="Submit" @tap="submitPayment" />
+                    <Button class="submit-button" backgroundColor="BLACK" text="Submit" @tap="submitPayment" borderRadius="5"  marginTop="20" color="white" fontWeight="bold" />
                 </StackLayout>
             </StackLayout>
         </GridLayout>
@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             url: "https://prettyshopfemobilev2.vercel.app/checkoutmobile/" + getString('token'),
-            checkoutBodyArray: [], fullname: "", addpress: "", phone: "", selectedPage: 'shipcod'
+            checkoutBodyArray: [], fullname: "Le Quang Huy", addpress: "Linh Trung, Thu Duc, TPHCM", phone: "0123456789", selectedPage: 'shipcod'
         }
     },
     methods: {
@@ -195,7 +195,7 @@ export default {
 .borderr.active {
     padding: 10;
     border-radius: 5;
-    background-color: rgba(0, 255, 213, 0.227);
+    background-color: rgba(114, 251, 80, 0.2);
 }
 </style>
 

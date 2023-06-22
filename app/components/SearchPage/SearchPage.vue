@@ -18,15 +18,14 @@
                         <StackLayout row="0">
                             <TextField v-model="searchQuery" @input="search" placeholder="Search...">
                             </TextField>
-                            <Label v-if="searchResults.length === 0" text="No results found!" fontSize="20"
+                            <Label v-if="searchResults.length === 0" text="No results found!" fontSize="20" 
                                 fontWeight="bold" margin="12"></Label>
                         </StackLayout>
 
-                        <StackLayout v-if="searchResults.length != 0" row="1" backgroundColor="#b3cde0" borderRadius="10"
+                        <StackLayout v-if="searchResults.length != 0" row="1" backgroundColor="white" borderRadius="10" color="black"
                             shadowColor="#000000" shadowOffsetHeight="5" shadowOpacity="0.5">
                             <GridLayout columns="*, auto" alignItems="center">
-                                <Label :text="'Search category for ' + searchQuery" class="title" fontSize="20"
-                                    fontWeight="bold" margin="12" color="#FFFFFF" />
+                               
                             </GridLayout>
                             <ScrollView orientation="horizontal" showScrollBarIndicator="true" horizontalAlignment="end">
                                 <WrapLayout itemSpacing="12" v-if="categories">
@@ -37,9 +36,9 @@
                             <Label class="info" text="No category!" v-if="!categories" />
                         </StackLayout>
 
-                        <StackLayout v-if="searchResults.length != 0" row="2" flexDirection="column" orientation="vertical"
+                        <StackLayout v-if="searchResults.length != 0" row="2" flexDirection="column" orientation="vertical" backgroundColor="white" borderRadius="10" color="black"
                             marginTop="10">
-                            <Label :text="'Search product for ' + searchQuery" class="title" fontSize="20" fontWeight="bold"
+                            <Label :text="'Search product for 🔎 '  + searchQuery" class="title" fontSize="20" fontWeight="bold"
                                 margin="12" />                         
                             <ScrollView>
                                 <StackLayout class="card-body" justifyContent="space-around" alignItems="center"

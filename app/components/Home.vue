@@ -2,23 +2,32 @@
   <Page class="page">
     <ActionBar class="action-bar">
       <NavigationButton visibility="hidden" />
-      <GridLayout columns="*, auto, auto">
-        <!-- <Label text.decode="&#xf0c9;" @tap="onDrawerButtonTap" class="fas " col="2" /> -->
+
+      
+
+      <GridLayout columns="auto, 250,auto">
+        <Image
+          src="https://img.freepik.com/premium-vector/business-logo-template-fashion-branding-design_278222-2415.jpg?size=626&ext=jpg&ga=GA1.1.284055043.1685365997&semt=ais"
+          col="0"
+          width="50"
+        />
+
         <Label
           class="action-bar-title"
-          text="PRETTYSHOP"
-          colSpan="2"
+          text="PRETTY"
+          col="1"
           fontWeight="900"
           letterSpacing="0.5"
-          color="rgb(0, 191, 255)"
-          textShadow="1 1 rgba(0, 0, 0, 0.25) "
+          color="BLACK"
+          textShadow="1 1 rgba(0, 0, 0, 0.25)"
           fontFamily=""
         />
+        <!-- color="rgb(0, 191, 255)" -->
         <Image
           src="https://prettyshopfemobilev2.vercel.app/icon/search.png"
           class="fas right-aligned"
           @tap="onDrawerButtonTap"
-          col="1"
+          col="2"
         />
       </GridLayout>
     </ActionBar>
@@ -35,7 +44,7 @@
       <TabViewItem title="Product">
         <FrameProduct />
       </TabViewItem>
-      <TabViewItem title="Cart">
+      <TabViewItem title="WISHLIST">
         <FrameCart />
       </TabViewItem>
       <TabViewItem title="Setting">
@@ -57,6 +66,7 @@ import FrameCart from "../container/FrameHome/FrameCart";
 import FrameSetting from "../container/FrameHome/FrameSetting";
 
 import SearchPage from "./SearchPage/SearchPage";
+import PageListCart from "./PayMent/PageListCart.vue";
 
 export default {
   mounted() {
@@ -82,6 +92,7 @@ export default {
     FrameProduct,
     FrameCart,
     FrameSetting,
+    PageListCart
   },
   computed: {
     message() {
