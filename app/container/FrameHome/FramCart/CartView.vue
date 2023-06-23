@@ -3,7 +3,7 @@
         <StackLayout class="container">
             <!--        for each order display -->
             <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40">
-                <Label text="Your order" class="title" fontSize="20" fontWeight="bold" />
+                <Label text="Your order" class="title" fontSize="20" fontWeight="bold" margin="5 5 10 18"/>
 
                 <ScrollView>
                     <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
@@ -42,6 +42,7 @@ export default {
                     this.orders.forEach((order) => {
                         this.orderList.push({
                             id: order.id,
+                            status:order.status,
                             totalCost: order.totalPrice,
                             // get short date
                             orderdate: order.createdDate.substring(0, 10),

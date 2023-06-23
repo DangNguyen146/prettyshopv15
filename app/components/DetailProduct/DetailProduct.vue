@@ -1,132 +1,413 @@
 <template>
   <Page>
-    <!-- <Image :src="product.imageURL" /> -->
-
-    <ScrollView>
-      <StackLayout rows="auto, auto, auto, auto, auto" columns="*, auto">
-        <StackLayout row="0" col="0" rowSpan="5" class="product-image-container">
-          <!-- Add a check for product.imageURL before rendering the image -->
-          <Image :src="product.imageURL" stretch="aspectFit" class="product-image" />
-        </StackLayout>
-        <Label row="0" col="1" class="product-name" :text="product.name" marginLeft="20" marginRight="20" fontSize="30"
-          fontWeight="bold" textWrap="true" />
-        <Label row="1" col="1" class="product-description" :text="'purchases:' + product.accessCount" marginLeft="20"
-          marginRight="20" fontSize="20" />
-        <Label row="1" col="1" class="product-description" :text="product.description" marginLeft="20" marginRight="20"
-          fontSize="20" />
-        <Label row="2" col="1" class="product-price" :text="'Price: $' + product.price" fontSize="" />
-
-        <GridLayout rows="auto" columns="*, *">
-          <Label row="0" col="0" text="Size:" class="size-label" marginLeft="20" fontSize="20" />
-
-          <Dropdown :items="availableSizes" class="size-dropdown" v-model="size"
-            @update:selectedItem="onUpdateSelectedItem" marginRight="20" />
-        </GridLayout>
-
-        <StackLayout row="3" col="1" class="product-quantity-container" orientation="horizontal"
-          verticalAlignment="center">
-          <Label class="product-quantity" :text="'Size: ' + sizeQuality" marginLeft="20" fontSize="20" />
-          <Label class="product-quantity-label" :text="'Số lượng:' + quantity.toString()" fontSize="subtitle" />
-
-          <Button class="product-quantity-increase" text="+" @tap="increaseQuantity" paddingLeft="10" paddingRight="10" />
-          <Button class="product-quantity-decrease" text="-" paddingLeft="10" paddingRight="10" @tap="decreaseQuantity" />
-
-        </StackLayout>
-        <StackLayout row="5" col="1" orderRadius="10" shadowColor="#000000" shadowOffsetHeight="5" shadowOpacity="0.5">
-          <Label :text="'Tag: ' + sizeQuality" marginLeft="20" fontSize="20" />
-          <Label v-for="tag in listTag" :text="tag.tagName" :key="tag.id" @tap="handleTagPress(tag.id)" fontSize="15"
-            color="#123456" margin="12">
-          </Label>
-        </StackLayout>
-
-
-
-
-        <StackLayout row="4" backgroundColor="#b3cde0" borderRadius="10" shadowColor="#000000" shadowOffsetHeight="5"
-          shadowOpacity="0.5">
-          <GridLayout columns="*, auto" alignItems="center">
-            <Label text="Product you will like" class="title" fontSize="20" fontWeight="bold" margin="12"
-              color="#FFFFFF" />
-          </GridLayout>
-          <ScrollView orientation="horizontal" showScrollBarIndicator="true" horizontalAlignment="end">
-            <WrapLayout itemSpacing="12">
-              <StackLayout class="item-product" @tap="goToDetails(product1.id)">
-                <Image :src="product1.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
-                  border-radius="50" />
-                <Label :text="product1.name" fontSize="15" margin="12" />
-              </StackLayout>
-              <StackLayout class="item-product" @tap="goToDetails(product2.id)">
-                <Image :src="product2.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
-                  border-radius="50" />
-                <Label :text="product2.name" fontSize="15" margin="12" />
-
-              </StackLayout>
-              <StackLayout class="item-product" @tap="goToDetails(product3.id)">
-                <Image :src="product3.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
-                  border-radius="50" />
-                <Label :text="product3.name" fontSize="15" margin="12" />
-
-              </StackLayout>
-              <StackLayout class="item-product" @tap="goToDetails(product4.id)">
-                <Image :src="product4.imageURL" class="card-img-top" stretch="aspectFit" width="200" height="200"
-                  border-radius="50" />
-                <Label :text="product4.name" fontSize="15" margin="12" />
-              </StackLayout>
-            </WrapLayout>
-          </ScrollView>
-        </StackLayout>
-
-
-        <Button row="6" col="1" text="+  🛒" fontSize="25" class="add-to-cart-button"
-          @tap="btnAddCart(product.id, quantity)" />
-        <Button row="5" col="1" text="+  ❤ " fontSize="25" class="add-to-cart-button" @tap="btnAddWishList()" />
-        <Label class="comment-product-name" text="" fontSize="title" fontWeight="bold" />
-        <StackLayout rows="auto, auto, auto, auto, auto" columns="*, auto">
-          <StackLayout row="0" col="0" rowSpan="5" @loaded="initRating">
-            <Label text="Rating:" class="rating-label" marginLeft="20" fontSize="20" />
-            <WrapLayout itemSpacing="12" class="star-container" marginLeft="30">
-              <Label row="0" col="1" class="star" @tap="selectRating(1)" borderColor="#eee" borderRadius="5" padding="10"
-                fontSize="24" :text="selectedRating >= 1 ? ' ❤ ' : ' 🤍 '" />
-              <Label row="1" col="1" class="star" @tap="selectRating(2)" borderColor="#eee" borderRadius="5" padding="10"
-                fontSize="24" :text="selectedRating >= 2 ? ' ❤ ' : ' 🤍 '" />
-              <Label row="2" col="1" class="star" @tap="selectRating(3)" borderColor="#eee" borderRadius="5" padding="10"
-                fontSize="24" :text="selectedRating >= 3 ? ' ❤ ' : ' 🤍 '" />
-              <Label row="3" col="1" class="star" @tap="selectRating(4)" borderColor="#eee" borderRadius="5" padding="10"
-                fontSize="24" :text="selectedRating >= 4 ? ' ❤ ' : ' 🤍 '" />
-              <Label row="4" col="1" class="star" @tap="selectRating(5)" borderColor="#eee" borderRadius="5" padding="10"
-                fontSize="24" :text="selectedRating >= 5 ? ' ❤ ' : ' 🤍 '" />
-            </WrapLayout>
-          </StackLayout>
-          <StackLayout row="1" col="1" class="comment-container" @loaded="initComment">
-            <Label text="Comment:" class="comment-label" marginLeft="20" marginTop="30" fontSize="20" />
-            <TextField class="comment-field" hint="Type your comment here" returnKeyType="done" :text="commentINput"
-              @textChange="onCommentChange" marginLeft="20" />
-          </StackLayout>
-          <Button row="2" col="1" class="submit-button" text="Submit" @tap="addComment"
-            backgroundColor="rgb(0, 191, 255, 0.8)" color="white" fontWeight="bold" borderRadius="100"
-            boxShadow="0 8 15 rgba(0, 0, 0, 0.3)" />
-          <ActivityIndicator row="3" col="1" class="activity-indicator" :busy="isLoading" />
-        </StackLayout>
-        <StackLayout row="7" col="1" orientation="horizontal">
-          <StackLayout width="100%" height="100%">
-            <GridLayout rows="*, *, auto">
-              <StackLayout row="2" flexDirection="column" orientation="vertical" marginTop="40">
-                <ScrollView>
-                  <!-- Add the 'v-if' directive to display products only when there are products -->
-                  <StackLayout class="card-body" justifyContent="space-around" alignItems="center"
-                    v-if="comments && comments.length > 0">
-                    <CommentBox v-for="comment of comments" :key="comment.id" :comment="comment" :product="product"
-                      :userID="userID" />
-                  </StackLayout>
-                  <!-- Display a message when there are no products -->
-                  <Label v-else class="info" text="No comment available" />
-                </ScrollView>
-              </StackLayout>
+    <AbsoluteLayout >
+      <StackLayout width="100%" height="100%">
+        <ScrollView marginBottom="70">
+          <StackLayout rows="auto, auto, auto, auto, auto" columns="*, auto">
+            <StackLayout
+              row="0"
+              col="0"
+              rowSpan="5"
+              class="product-image-container"
+            >
+              <!-- <SliderCarousel :myData="myData"></SliderCarousel> -->
+              <Image
+                :src="product.imageURL"
+                stretch="aspectFit"
+                class="product-image"
+              />
+            </StackLayout>
+            <GridLayout
+              row="0"
+              col="1"
+              marginTop="10"
+              columns="4*, *"
+              rows="auto"
+            >
+              <Label
+                row="0"
+                col="0"
+                class="product-name"
+                :text="product.name"
+                marginLeft="20"
+                textWrap="true"
+              />
+              <Label
+                row="0"
+                col="1"
+                class="product-price"
+                :text="'$' + product.price"
+                fontSize=""
+                fontWeight="bold"
+                color="red"
+                
+              />
             </GridLayout>
+            <Label
+              row="1"
+              col="1"
+              class="product-description"
+              :text="'Purchases:' + product.accessCount"
+              marginLeft="20"
+              marginRight="20"
+              fontSize="20"
+            />
+            <Label
+              class="product-description"
+              :text="product.description"
+              marginLeft="20"
+              marginRight="20"
+              fontSize="20"
+            />
+            <StackLayout
+              orientation="horizontal"
+              marginLeft="15"
+              marginTop="10"
+            >
+              <Button
+                v-for="(size, index) in availableSizes"
+                :key="index"
+                :class="{
+                  selected: size.label === sizeQuality,
+                  unselected: size.label !== sizeQuality,
+                }"
+                :text="size.label"
+                @tap="onUpdateSelectedItem(size)"
+              />
+            </StackLayout>
+            <Label
+              marginLeft="20"
+              fontSize="15"
+              v-if="selectedSize"
+              :text="'Warehouse: ' + selectedSize.value"
+            />
+            <StackLayout
+              marginLeft="15"
+              marginTop="10"
+              orientation="horizontal"
+            >
+              <Button class="blackColor" />
+              <Button class="whiteColor" />
+              <Button class="greenColor" />
+            </StackLayout>
+            <StackLayout
+              row="3"
+              col="1"
+              class="product-quantity-container"
+              orientation="horizontal"
+              verticalAlignment="center"
+            >
+              <Label
+                class="product-quantity-label"
+                :text="'Quatity: '"
+                fontSize="15"
+              />
+
+              <Button
+                class="borderless-button"
+                fontSize="15"
+                text="-"
+                paddingLeft="10"
+                paddingRight="10"
+                @tap="decreaseQuantity"
+              />
+
+              <Label :text="quantity.toString()" fontSize="20" />
+              <Button
+                class="borderless-button"
+                fontSize="15"
+                text="+"
+                @tap="increaseQuantity"
+                paddingLeft="10"
+                paddingRight="10"
+              />
+            </StackLayout>
+
+            <WrapLayout row="5" col="1">
+              <Button
+                width="15%"
+                text="♡"
+                class="add-to-favorite"
+                @tap="btnAddWishList()"
+                marginLeft="20"
+              />
+              <Button
+                width="70%"
+                margin="10"
+                text="Buy now"
+                class="add-to-cart-button"
+                @tap="btnAddCart(product.id, quantity)"
+              />
+            </WrapLayout>
+
+            <Label
+              row="5"
+              col="1"
+              class="product-description"
+              textWrap="true"
+              :text="'Information: \nPattern: Rubber Logo\nSize: M/L/XL\nMaterial: Premium Cotton Tici Spandex.\nParameter:\nSize M: Length 71cm, Width 54cm\nSize L: Length 71cm, Width 54cm\nSize XL: Length 71cm, Width 54cm'"
+              marginLeft="20"
+              marginRight="20"
+              fontSize="20"
+            />
+            <Image
+              :src="'https://pos.nvncdn.net/05016d-25618/ps/20230417_lbkxrVEz.jpg'"
+              marginTop="20"
+              class="product-image"
+            />
+
+            <Label
+              row="4"
+              text="Product you may like"
+              class="title"
+              fontSize="20"
+              fontWeight="bold"
+              marginLeft="20"
+              color="#0c0c0c"
+              marginTop="20"
+            />
+            <StackLayout
+              row="4"
+              borderRadius="10"
+              shadowColor="#000000"
+              shadowOffsetHeight="5"
+              shadowOpacity="0.5"
+            >
+              <GridLayout columns="*, auto" alignItems="center"> </GridLayout>
+              <ScrollView
+                orientation="horizontal"
+                showScrollBarIndicator="true"
+                horizontalAlignment="end"
+              >
+                <WrapLayout margin-top="10" itemSpacing="12">
+                  <StackLayout
+                    margin="10"
+                    class="item-product"
+                    @tap="goToDetails(product3.id)"
+                  >
+                    <Image
+                      :src="product1.imageURL"
+                      class="card-img-top"
+                      stretch="aspectFit"
+                      width="200"
+                      height="200"
+                      borderRadius="10"
+                      border-radius="50"
+                    />
+                    <Label
+                      :text="product1.name"
+                      fontSize="15"
+                      margin="12"
+                      textAlign="center"
+                    />
+                  </StackLayout>
+
+                  <StackLayout
+                    margin="10"
+                    class="item-product"
+                    @tap="goToDetails(product2.id)"
+                  >
+                    <Image
+                      :src="product2.imageURL"
+                      class="card-img-top"
+                      stretch="aspectFit"
+                      width="200"
+                      height="200"
+                      border-radius="50"
+                    />
+                    <Label :text="product2.name" fontSize="15" margin="12" />
+                  </StackLayout>
+                  <StackLayout
+                    margin="10"
+                    class="item-product"
+                    @tap="goToDetails(product3.id)"
+                  >
+                    <Image
+                      :src="product3.imageURL"
+                      class="card-img-top"
+                      stretch="aspectFit"
+                      width="200"
+                      height="200"
+                      border-radius="50"
+                    />
+                    <Label :text="product3.name" fontSize="15" margin="12" />
+                  </StackLayout>
+                  <StackLayout
+                    margin="10"
+                    class="item-product"
+                    @tap="goToDetails(product4.id)"
+                  >
+                    <Image
+                      :src="product4.imageURL"
+                      class="card-img-top"
+                      stretch="aspectFit"
+                      width="200"
+                      height="200"
+                      border-radius="50"
+                    />
+                    <Label :text="product4.name" fontSize="15" margin="12" />
+                  </StackLayout>
+                </WrapLayout>
+              </ScrollView>
+            </StackLayout>
+
+            >
+            <Label
+              class="comment-product-name"
+              text=""
+              fontSize="title"
+              fontWeight="bold"
+            />
+            <StackLayout rows="auto, auto, auto, auto, auto" columns="*, auto">
+              <StackLayout row="0" col="0" rowSpan="5" @loaded="initRating">
+                <Label
+                  text="Rating:"
+                  class="rating-label"
+                  marginLeft="20"
+                  fontSize="20"
+                />
+                <WrapLayout
+                  itemSpacing="12"
+                  class="star-container"
+                  marginLeft="30"
+                >
+                  <Label
+                    row="0"
+                    col="1"
+                    class="star"
+                    @tap="selectRating(1)"
+                    borderColor="#eee"
+                    borderRadius="5"
+                    padding="10"
+                    fontSize="24"
+                    :text="selectedRating >= 1 ? ' ❤ ' : ' 🤍 '"
+                  />
+                  <Label
+                    row="1"
+                    col="1"
+                    class="star"
+                    @tap="selectRating(2)"
+                    borderColor="#eee"
+                    borderRadius="5"
+                    padding="10"
+                    fontSize="24"
+                    :text="selectedRating >= 2 ? ' ❤ ' : ' 🤍 '"
+                  />
+                  <Label
+                    row="2"
+                    col="1"
+                    class="star"
+                    @tap="selectRating(3)"
+                    borderColor="#eee"
+                    borderRadius="5"
+                    padding="10"
+                    fontSize="24"
+                    :text="selectedRating >= 3 ? ' ❤ ' : ' 🤍 '"
+                  />
+                  <Label
+                    row="3"
+                    col="1"
+                    class="star"
+                    @tap="selectRating(4)"
+                    borderColor="#eee"
+                    borderRadius="5"
+                    padding="10"
+                    fontSize="24"
+                    :text="selectedRating >= 4 ? ' ❤ ' : ' 🤍 '"
+                  />
+                  <Label
+                    row="4"
+                    col="1"
+                    class="star"
+                    @tap="selectRating(5)"
+                    borderColor="#eee"
+                    borderRadius="5"
+                    padding="10"
+                    fontSize="24"
+                    :text="selectedRating >= 5 ? ' ❤ ' : ' 🤍 '"
+                  />
+                </WrapLayout>
+              </StackLayout>
+              <StackLayout
+                row="1"
+                col="1"
+                class="comment-container"
+                @loaded="initComment"
+              >
+                <Label
+                  text="Comment:"
+                  class="comment-label"
+                  marginLeft="20"
+                  marginTop="30"
+                  fontSize="20"
+                />
+                <TextField
+                  class="comment-field"
+                  hint="Type your comment here"
+                  returnKeyType="done"
+                  :text="commentINput"
+                  @textChange="onCommentChange"
+                  marginLeft="20"
+                />
+              </StackLayout>
+              <Button
+                row="2"
+                col="1"
+                text="Submit"
+                @tap="addComment"
+                marginTop="20"
+                class="add-to-cart-button"
+                color="white"
+              />
+              <ActivityIndicator
+                row="3"
+                col="1"
+                class="activity-indicator"
+                :busy="isLoading"
+              />
+            </StackLayout>
+            <StackLayout row="7" col="1" orientation="horizontal">
+              <StackLayout width="100%" height="100%">
+                <GridLayout rows="*, *, auto">
+                  <StackLayout
+                    row="2"
+                    flexDirection="column"
+                    orientation="vertical"
+                    marginTop="40"
+                  >
+                    <ScrollView>
+                      <StackLayout
+                        class="card-body"
+                        justifyContent="space-around"
+                        alignItems="center"
+                        v-if="comments && comments.length > 0"
+                      >
+                        <CommentBox
+                          v-for="comment of comments"
+                          :key="comment.id"
+                          :comment="comment"
+                          :product="product"
+                          :userID="userID"
+                        />
+                      </StackLayout>
+
+                      <Label v-else class="info" text="No comment available" />
+                    </ScrollView>
+                  </StackLayout>
+                </GridLayout>
+              </StackLayout>
+            </StackLayout>
           </StackLayout>
-        </StackLayout>
+        </ScrollView>
       </StackLayout>
-    </ScrollView>
+      <StackLayout width="100%" height="100%">
+        <DockLayout width="100%" height="100%" stretchLastChild="false">
+          <StackLayout text="bottom" dock="bottom" height="60">
+            <CartButton />
+          </StackLayout>
+        </DockLayout>
+      </StackLayout>
+    </AbsoluteLayout>
   </Page>
 </template>
 
@@ -136,14 +417,10 @@ import { apiUrl } from "../../config/config";
 import ListCommentBox from "./../../container/ListCommentBox";
 import CommentBox from "./../../container/CommentBox";
 import Dropdown from "~/container/Dropdown";
-
+import CartButton from "~/container/CartButton.vue";
 import ProductBoxHome from "./ProductBoxHome";
-import DetailProduct from './DetailProduct.vue';
-
-// import { TabView } from "@nativescript/core";
-
-// import SearchPage from "../SearchPage/SearchPage.vue";
-
+import DetailProduct from "./DetailProduct.vue";
+import SliderCarousel from "~/container/SliderCarousel.vue";
 
 export default {
   props: ["id"],
@@ -151,8 +428,12 @@ export default {
   components: {
     ListCommentBox,
     CommentBox,
-    Dropdown, ProductBoxHome
+    Dropdown,
+    ProductBoxHome,
+    SliderCarousel,
+    CartButton,
   },
+
   data() {
     return {
       product: {},
@@ -163,6 +444,7 @@ export default {
       newcomment: null,
       userID: null,
       availableSizes: [],
+      tags: [],
       size: null,
       quantityBySizes: {},
       sizeQuality: "",
@@ -170,28 +452,28 @@ export default {
       product1: {
         id: null,
         imageURL: null,
-        name: null
+        name: null,
       },
       product2: {
         id: null,
         imageURL: null,
-        name: null
+        name: null,
       },
       product3: {
         id: null,
         imageURL: null,
-        name: null
+        name: null,
       },
       product4: {
         id: null,
         imageURL: null,
-        name: null
+        name: null,
       },
       listTag: [],
+      selectedSize: null,
     };
   },
   methods: {
-    
     async fetchUser(token) {
       try {
         const response = await fetch(
@@ -218,9 +500,9 @@ export default {
         }
       }
     },
-    handleTagPress(id){
+    handleTagPress(id) {
       this.$navigateTo(SearchPage, {
-        id:id
+        id: id,
       });
     },
     async fetchData5() {
@@ -231,25 +513,23 @@ export default {
         if (response) {
           const data = await response.json();
           this.product = data;
+
           this.availableSizes = data.size
             .map((size, index) => {
               return {
                 label: size,
-                value: `Quantity: ${data.quantityBySizes[index]}`,
+                value: data.quantityBySizes[index],
               };
             })
-            .filter((size) => size.value !== "Quantity: 0");
+            .filter((size) => size.value !== "0");
+
+          console.log(this.availableSizes.toString());
         } else {
           alert("Error in fetching data");
         }
       } catch (error) {
         alert("Error in fetching data", error);
       }
-
-
-
-
-
     },
     async fetchData6() {
       try {
@@ -482,7 +762,9 @@ export default {
     },
     onUpdateSelectedItem(selectedItem) {
       this.sizeQuality = selectedItem.label;
+      this.selectedSize = selectedItem;
     },
+    updateColor(color) {},
     goToDetails(id) {
       try {
         this.$navigateTo(DetailProduct, {
@@ -535,42 +817,103 @@ export default {
   width: 500;
 }
 
+.borderless-button {
+  border-color: transparent;
+  border-width: 1;
+  z-index: 0;
+}
+
 .product-name {
-  margin-top: 20;
-  text-align: center;
-  font-weight: 700;
-  font-size: 2rem;
+  text-align: left;
+  font-weight: 500;
+  color: black;
+  font-size: 20;
 }
 
 .product-description {
+  color: grey;
   margin: 0 10;
 }
 
 .product-price {
-  margin-top: 10;
+  /* margin-top: 10;
   color: red;
+  margin-left: 20; */
   margin-left: 20;
-
+  align-items: end;
   font-size: 20;
 }
-
+.selected {
+  width: 50;
+  height: 35;
+  background-color: black;
+  color: white;
+  border-width: 2;
+  border-color: black;
+}
+.unselected {
+  width: 50;
+  height: 35;
+  border-width: 2;
+  border-color: black;
+}
+.blackColor {
+  border-width: 1;
+  border-color: blue;
+  margin-right: 10;
+  width: 20;
+  height: 20;
+  border-radius: 100;
+  background-color: black;
+}
+.whiteColor {
+  margin-right: 10;
+  width: 20;
+  height: 20;
+  border-radius: 100;
+  background-color: white;
+}
+.greenColor {
+  margin-right: 10;
+  width: 20;
+  height: 20;
+  border-radius: 100;
+  background-color: green;
+}
 .product-quantity-container {
   font-size: 20;
 }
 
 .product-quantity-label {
-  margin-left: 40;
+  margin-left: 20;
 }
 
-.product-quantity {}
+.product-quantity {
+}
 
 .add-to-cart-button {
-  width: 90%;
-  height: 50;
-  background-color: rgb(0, 191, 255, 0.8);
+  background-color: black;
   color: white;
-  font-weight: bold;
-  border-radius: 100px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  font-size: 15px;
+  font-weight: 400;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+.add-to-favorite {
+  background-color: gainsboro;
+
+  color: black;
+  font-size: 23px;
+  font-weight: 400;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 </style>

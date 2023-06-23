@@ -9,18 +9,16 @@
     @tap="goToDetails"
     marginTop="10"
     boxShadow="0 8 15 rgba(0, 0, 0, 0.1)"
-    width="92%"
-    height="190"
+    width="340"
+    height="170"
   >
-    <StackLayout col="0" class="product-image"  marinLeft="0" marginRight="5" width="50%">
+    <StackLayout col="0" class="product-image" marginRight="5" width="50%">
       <Image
         v-if="product.imageURL"
         :src="product.imageURL"
-        
+        stretch="aspectFit"
         borderRadius="10 0 0 10"
-        height="190"
-        width="1000"
-        
+        height="170"
         @error="handleImageError"
       />
     </StackLayout>
@@ -45,13 +43,6 @@
         :text="product.description + '...'"
         textWrap="true"
         margin="10 10 2 10"
-      />
-      <Label
-        text="View more"
-        textWrap="true"
-        margin="10 10 2 110"
-        
-        fontStyle="italic"
       />
     </StackLayout>
   </GridLayout>

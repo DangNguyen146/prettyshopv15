@@ -3,8 +3,8 @@
     <StackLayout width="100%" height="100%" ref="scrollView">
       <ScrollView>
         <StackLayout>
-          <GridLayout rows="*, *, auto">
-            <StackLayout row="0">
+          <GridLayout rows="*, auto,auto, auto">
+            <StackLayout row="0" >
               <SliderCarousel :myData="myData" />
             </StackLayout>
 
@@ -36,8 +36,8 @@
                     v-for="category of categories"
                     :key="category.id"
                     :category="category"
-                    marginLeft="10"
-                    marginRight="10"
+                    marginLeft="18"
+                    marginRight="0"
                   />
                 </WrapLayout>
               </ScrollView>
@@ -76,7 +76,7 @@
 
                 <!-- Display a message when there are no products -->
                 <Label v-else class="info" text="No products available" />
-
+               
                 <!-- <Button
                   text="More"
                   @tap="movescreenHoem"

@@ -13,15 +13,15 @@
     </StackLayout>
     <StackLayout col="1" class="product-details" width="50%">
       <Label
-        :text="'No. ' + order.id"
+        :text="'No. 00' + order.id"
         fontSize="subtitle"
         fontWeight="bold"
         marginBottom="5"
       />
       <Label
-        :text="'TotalItems: ' + order.totalItems"
+        :text="'x' + order.totalItems + ' Item'"
         fontSize="subtitle"
-        color="red"
+       
         marginBottom="5"
       />
       <Label
@@ -30,8 +30,18 @@
         color="red"
         marginBottom="5"
       />
-      <Label class="mb-0" :text="'Ordered on : ' + order.orderdate"></Label>
-      <Label class="mb-0" :text="'Status : ' + order.status"></Label>
+      <Label class="mb-0" fontSize="subtitle" :text="'Ordered on : ' + order.orderdate"></Label>
+      <Label
+        class="mb-0" fontSize="subtitle"
+        :text="order.status ? 'Status: ' + order.status : 'Status: Pending'"
+      ></Label>
+      <Label
+        text="View more"
+        textWrap="true"
+        margin="10 10 2 140"
+        
+        fontStyle="italic"
+      />
     </StackLayout>
   </GridLayout>
 </template>

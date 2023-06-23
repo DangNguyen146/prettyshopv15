@@ -7,7 +7,7 @@
                 property
                 with value of 50 -->
                 <!-- Add the 'v-if' directive to only display the label when there are products -->
-                <Label text="Your wishList" class="title" fontSize="20" fontWeight="bold" />
+                <Label text="Your wishList" marginLeft="18" class="title" fontSize="20" fontWeight="bold" />
 
                 <ScrollView @scroll="handleScroll">
                     <!-- Add the 'v-if' directive to display products only when there are products -->

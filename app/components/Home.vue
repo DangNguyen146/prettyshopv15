@@ -38,7 +38,7 @@
       @selectedIndexChange="indexChange"
       fontWeight="bold"
     >
-      <TabViewItem title="Home">
+      <TabViewItem title="Home" >
         <FrameHome />
       </TabViewItem>
       <TabViewItem title="Product">

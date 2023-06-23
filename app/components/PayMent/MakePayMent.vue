@@ -14,7 +14,7 @@
                 <Label class="label" text="Fullname:" />
                 <TextField class="text-field" v-model="fullname"  autocapitalizationType="none" />
 
-                <Label class="label" text="Addpress:" />
+                <Label class="label" text="Address:" />
                 <TextField class="text-field" v-model="addpress"  autocapitalizationType="none" />
 
                 <Label class="label" text="Phone:" />

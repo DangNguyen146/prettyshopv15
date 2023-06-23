@@ -75,30 +75,37 @@
       </WrapLayout>
       <!-- <Label :text="comment.rating" fontSize="subtitle" color="red" marginBottom="5" /> -->
       <Label :text="comment.content" />
-      <StackLayout row="5" col="1" class="product-details" width="80%">
-        <Button
-          text="Edit"
-          borderRadius="100"
-          backgroundColor="green"
-          fontWeight="bold"
-          marginRight="5"
-          boxShadow="0 8 15 rgba(0, 0, 0, 0.2)"
-          color="white"
-          @tap="onEdit"
-          v-if="comment.user.id === userID && !editing"
-        />
-        <Button
-          text="Delete"
-          marginRight="5"
-          borderRadius="100"
-          backgroundColor="red"
-          fontWeight="bold"
-          boxShadow="0 8 15 rgba(0, 0, 0, 0.2)"
-          color="white"
-          v-if="comment.user.id === userID && !editing"
-          @tap="onDelete"
-        />
-      </StackLayout>
+      <GridLayout columns="*, *" class="product-details" width="80%">
+  <Button
+    text="Edit"
+    col="0"
+    borderRadius="5"
+    backgroundColor="black"
+    fontWeight="bold"
+    marginRight="5"
+    boxShadow="0 8 15 rgba(0, 0, 0, 0.2)"
+    color="white"
+    height="30"
+    width="70"
+    @tap="onEdit"
+    v-if="comment.user.id === userID && !editing"
+  />
+  <Button
+  marginLeft="0"
+    col="1"
+    text="Delete"
+    marginRight="5"
+    borderRadius="5"
+    backgroundColor="red"
+    fontWeight="bold"
+    height="30"
+    width="70"
+    boxShadow="0 8 15 rgba(0, 0, 0, 0.2)"
+    color="white"
+    v-if="comment.user.id === userID && !editing"
+    @tap="onDelete"
+  />
+</GridLayout>
       <StackLayout
         row="6"
         col="1"

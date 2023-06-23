@@ -22,7 +22,7 @@
                                     <Label :text="'Quantity: ' + cartItem.quantity" fontSize="subtitle" fontWeight="bold"
                                         marginBottom="5" />
                                     <Button text="Delete"
-                                        style=" backgroundColor: rgb(255, 0, 0);  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 20px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); cursor: pointer;"
+                                        style=" backgroundColor: rgb(255, 0, 0);  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 15px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); cursor: pointer;"
                                         @tap="delteCart(cartItem.id)" />
                                 </StackLayout>
                             </GridLayout>
@@ -30,9 +30,9 @@
                         <StackLayout row="1" backgroundColor="white" borderRadius="10" shadowColor="#000000" margin="15"
                             shadowOffsetHeight="5" shadowOpacity="0.5">
 
-                            <Label :text="'Total : $ ' + totalcost.toFixed(2)" fontWeight="bold" marginBottom="5" />
+                            <Label :text="'Total : $ ' + totalcost.toFixed(2)" fontWeight="bold" marginBottom="5"  fontSize="20"/>
                             <Button text="CONFIRM"
-                                style=" backgroundColor: black;  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 20px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); cursor: pointer;"
+                                style=" backgroundColor: black;  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 15px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); cursor: pointer;"
                                 @tap="goPayMentPay" />
                         </StackLayout>
                         <StackLayout row="2" backgroundColor="white" borderRadius="10" shadowColor="#000000" margin="15"
@@ -40,7 +40,7 @@
                             <Label :text="'Selected ' + cartItemsSelect.length + ' items'" fontWeight="bold"
                                 marginBottom="5" />
                             <Button text="DELETE SELECTED ITEMS"
-                                style=" backgroundColor: rgb(255, 0, 0);  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 20px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); cursor: pointer;"
+                                style=" backgroundColor: rgb(255, 0, 0);  color: white;  fontSize: 16px;  fontWeight: bold;  padding: 10px; border: none; border-radius: 15px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); cursor: pointer;"
                                 @tap="deleteSelectedItems" />
                         </StackLayout>
                     </GridLayout>

@@ -2,7 +2,7 @@
   <Carousel
     ref="myCarousel"
     debug="true"
-    height="350"
+    height="400"
     width="100%"
     color="white"
     @pageChanged="myChangePageEvent"
@@ -21,7 +21,7 @@
           :src="item.image"
           :backgroundColor="item.color"
           stretch="aspectFill"
-          height="350"
+          height="400"
         />
 
         <Label
